@@ -23,6 +23,9 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "ts-node": {
+    "esm": true
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/layout.tsx", "app/page.tsx", "app/notes/page.tsx", "app/notes/[id]/page.jsx"],
   "exclude": ["node_modules"]
 }
