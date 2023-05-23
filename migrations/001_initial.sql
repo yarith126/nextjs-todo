@@ -1,18 +1,19 @@
 -- UP
 
-CREATE TABLE Note (
+CREATE TABLE todo (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    title TEXT,
-    content TEXT,
-    created_at TEXT
+    uuid TEXT,
+    task TEXT,
+    isCompleted BOOLEAN,
+    createdAt TEXT
 );
 
-INSERT INTO Note (title, content, created_at)
-values ('title1', 'content1', DATETIME('now'));
+INSERT INTO todo (uuid, task, isCompleted, createdAt)
+VALUES ('123asdf', 'title1', true, DATETIME('now'));
 
-INSERT INTO Note (title, content, created_at)
-values ('title2', 'content2', DATE('now'));
+INSERT INTO todo (uuid, task, isCompleted, createdAt)
+VALUES ('23fasd', 'title2', false, DATE('now'));
 
 -- DOWN
 
-DROP TABLE Note;
+DROP TABLE todo;

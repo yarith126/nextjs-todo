@@ -1,9 +1,12 @@
 import Link from "next/link";
 import styles from "../Notes.module.css";
+import { baseUrl } from "@/lib/config";
 
 async function getNote(noteId: number) {
-  //   const response = await fetch(`link/to/api`);
-  //   const data = await response.json();
+  const url = `${baseUrl}api/note`;
+  console.log(url);
+  const response = await fetch(url);
+  const data = await response.json();
   return {
     id: 1,
     title: "test",
