@@ -1,35 +1,38 @@
 import Link from "next/link";
-import styles from "../Notes.module.css";
+import styles from "../Todo.module.css";
 import { baseUrl } from "@/lib/config";
+import { Todo } from "@/lib/todo-model";
+import { params } from "@/lib/type-alias";
 
-async function getNote(noteId: number) {
-  const url = `${baseUrl}api/note`;
+async function getTodo(id: number): Promise<Todo | null> {
+  const url = `${baseUrl}api/todo/${id}`;
   console.log(url);
   const response = await fetch(url);
-  const data = await response.json();
-  return {
-    id: 1,
-    title: "test",
-    content: "test",
-    created: "2023",
-  };
+  const json = await response.json();
+
+  const todo = Todo.fromJson(json["data"]);
+
+  return todo;
 }
 
-export default async function NotesPage({
-  params,
-}: {
-  params: { id: number };
-}) {
-  const note = await getNote(params.id);
+export default async function TodosPage({ params }: params) {
+  const todo = await getTodo(params.id);
+  if (todo == null) {
+    return (
+      <div className={styles.todo}>
+        <h1>Not Found</h1>
+      </div>
+    );
+  }
   return (
     <div>
-      <h1>Note ID: {note.id}</h1>
-      <div className={styles.note}>
-        <h2>{note.title}</h2>
-        <p>{note.content}</p>
-        <p>{note.created}</p>
+      <h1>Todo ID: {todo.id}</h1>
+      <div className={styles.todo}>
+        <h2>{todo.task}</h2>
+        <p>{todo.isCompleted}</p>
+        <p>{todo.createdAt}</p>
       </div>
-      <Link href="/notes">Go Back</Link>
+      <Link href="/todo">Go Back</Link>
     </div>
   );
 }

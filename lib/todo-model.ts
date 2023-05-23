@@ -38,12 +38,14 @@ export class Todo {
     );
   }
 
-  static fromJson(data: Map<string, any>): Todo | null {
-    const id = data.get("id");
-    const uuid = data.get("uuid");
-    const task = data.get("task");
-    const isCompleted = data.get("isCompleted");
-    const createdAt = data.get("createdAt");
+  static fromJson(data: object): Todo | null {
+    if (data == null) return null;
+    const todos = new Map(Object.entries(data));
+    const id = todos.get("id");
+    const uuid = todos.get("uuid");
+    const task = todos.get("task");
+    const isCompleted = todos.get("isCompleted");
+    const createdAt = todos.get("createdAt");
     if (this.#someIsNull(uuid, task, isCompleted, createdAt)) {
       return null;
     }
@@ -67,3 +69,5 @@ export class Todo {
     return res;
   }
 }
+
+type todoObject = {};

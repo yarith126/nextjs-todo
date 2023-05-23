@@ -5,8 +5,8 @@ async function runMigration() {
   const db = await new Database().connect();
   await db.migrate({ force: true });
 
-  // const notes = await db.all("SELECT * FROM todo");
-  // console.log(JSON.stringify(notes, null, 1));
+  // const todos = await db.all("SELECT * FROM todo");
+  // console.log(JSON.stringify(todos, null, 1));
   db.close();
 }
 

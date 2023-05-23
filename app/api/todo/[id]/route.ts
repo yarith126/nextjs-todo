@@ -2,6 +2,7 @@ import { Database } from "@/lib/database";
 import { ErrorResponse } from "@/lib/todo-api-helper";
 import { Todo } from "@/lib/todo-model";
 import { NextRequest, NextResponse } from "next/server";
+import { params } from "@/lib/type-alias";
 
 export async function GET({}, { params }: params) {
   const db = await new Database().connect();
@@ -62,5 +63,3 @@ export async function DELETE({}, { params }: params) {
 
   return NextResponse.json({ message: "success" });
 }
-
-type params = { params: { id: number } };

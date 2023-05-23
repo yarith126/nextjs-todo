@@ -8,18 +8,17 @@ async function getTodos(): Promise<Todo[]> {
   console.log(url);
   const response = await fetch(url);
   const json = await response.json();
-  console.log(json);
 
   let todos: Todo[] = [];
-  json["data"].map((data: Map<string, any>) => {
-    const todo = Todo.fromJson(data);
+  for(let i of json['data']){
+    const todo = Todo.fromJson(i);
     if (todo != null) todos.push(todo);
-  });
+  }
 
   return todos;
 }
 
-export default async function NotesPage() {
+export default async function TodosPage() {
   const todos = await getTodos();
 
   return (
@@ -37,8 +36,8 @@ export default async function NotesPage() {
 
 function TodoTile({ todo }: { todo: Todo }) {
   return (
-    <Link href={`/notes/${todo.id}`}>
-      <div className={styles.note}>
+    <Link href={`/todo/${todo.id}`}>
+      <div className={styles.todo}>
         <h2>{todo.uuid}</h2>
         <h2>{todo.task}</h2>
         <p>{todo.isCompleted}</p>
