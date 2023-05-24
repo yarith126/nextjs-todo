@@ -15,10 +15,6 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <main>
-          <nav>
-            <Link href="/">Home</Link>
-            <Link href="/todo">Todo</Link>
-          </nav>
           {children}
         </main>
       </body>

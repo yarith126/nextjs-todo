@@ -3,6 +3,7 @@ import { ErrorResponse } from "@/lib/todo-api-helper";
 import { Todo } from "@/lib/todo-model";
 import { NextRequest, NextResponse } from "next/server";
 import { params } from "@/lib/type-alias";
+import moment from "moment";
 
 export async function GET({}, { params }: params) {
   const db = await new Database().connect();
@@ -13,36 +14,36 @@ export async function GET({}, { params }: params) {
 }
 
 export async function PUT(req: NextRequest, { params }: params) {
-  let todo: Todo | null;
-  try {
-    let formData = await req.formData();
-    formData.set("id", params.id.toString());
-    todo = Todo.fromFormData(formData);
-  } catch (err) {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    return ErrorResponse.Todo400ParseFail();
-  }
-
-  if (todo == null) return ErrorResponse.Todo400BadRequest();
-
   const db = await new Database().connect();
-  const row = await db.get("SELECT * FROM todo WHERE id = ?", todo.id);
+  const row = await db.get("SELECT * FROM todo WHERE id = ?", params.id);
 
   if (row === undefined) {
     db.close();
     return ErrorResponse.Todo404NotFound();
   }
 
+  const id = row.id;
+  let task;
+  let isCompleted = row.isCompleted;
+  const lastUpdatedAt = moment().format("YYYY-MM-DD H:mm:ss");
+  try {
+    let formData = await req.formData();
+    task = formData.get("task") ?? row.task;
+    isCompleted = formData.get("isCompleted") ?? row.isCompleted;
+    isCompleted = isCompleted == "true" ? "true" : "false";
+  } catch (err) {
+    return ErrorResponse.Todo400ParseFail();
+  }
+
   await db.run(
     `
     UPDATE todo
-    SET uuid = ?,
-        task = ?,
+    SET task = ?,
         isCompleted = ?,
         lastUpdatedAt = ?
     WHERE id=?
     `,
-    [todo.uuid, todo.task, todo.isCompleted, todo.lastUpdatedAt]
+    [task, isCompleted, lastUpdatedAt, id]
   );
   db.close();
 

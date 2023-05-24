@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   let todo: Todo | null;
   try {
-    const date = moment().format("YYYY-MM-DD HH:MM:S");
+    const date = moment().format("YYYY-MM-DD H:mm:ss");
     const formData = await req.formData();
     formData.set("id", "");
     formData.set("uuid", uuidv4());

@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: "Century Gothic";
 }
 
 html,
@@ -8,17 +9,3 @@ body {
   margin: 0;
   padding: 0 2rem;
 }
-
-a {
-  color: inherit;
-  text-decoration: none;
-  padding: 0;
-  margin: 0;
-}
-
-nav a {
-    font-weight: bold;
-    margin: 0 0.5rem;
-    text-decoration: underline;
-}
-
