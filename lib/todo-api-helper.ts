@@ -19,7 +19,7 @@ export class ErrorResponse {
     return NextResponse.json(
       {
         message:
-          "missing or bad data types of uuid, task, isCompleted, createdAt",
+          "missing or bad data types of uuid, task, isCompleted, lastUpdatedAt",
       },
       { status: 400 }
     );

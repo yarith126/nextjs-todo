@@ -30,7 +30,7 @@ export default async function TodosPage({ params }: params) {
       <div className={styles.todo}>
         <h2>{todo.task}</h2>
         <p>{todo.isCompleted}</p>
-        <p>{todo.createdAt}</p>
+        <p>{todo.last_update}</p>
       </div>
       <Link href="/todo">Go Back</Link>
     </div>

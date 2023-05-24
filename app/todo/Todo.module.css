@@ -1,28 +1,89 @@
-.grid {
-  margin-top: 2rem;
+.row {
   display: flex;
-  align-items: flex-start;
+  flex-direction: row;
   justify-content: flex-start;
-  flex-wrap: wrap;
-  max-width: 1000px;
 }
 
-.todo {
-  height: auto;
-  width: 200px;
-  padding: 0.2rem 1rem;
-  margin: 0.5rem;
-  background: #ffff00;
-  box-shadow: 4px 4px 8px 1px #00000075;
+.mainBox h3 {
+  font-family: "Century Gothic";
+}
+
+.todoTile {
+  color: rgb(56, 56, 56);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  padding: 0.2rem 0.8rem;
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+  background: #92f3e6;
+  box-shadow: 0px 0px 1px 0.5px #38383875;
   border-radius: 2px;
 }
 
-.title {
-  padding: 0.1rem;
-  font-size: 1rem;
+.todoTile input {
+  transform: scale(2);
+  align-self: center;
+  height: min-content;
+  margin-left: 14px;
+  margin-right: 20px;
 }
 
-.content {
-  font-size: 0.7rem;
-  font-weight: lighter;
+.createTodo {
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.createTodo h3 {
+  font-family: "Century Gothic";
+}
+
+.createTodo input {
+  height: 50px;
+  padding-left: 10px;
+  font-size: 1.4rem;
+}
+
+.createTodo button {
+  height: 50px;
+  margin-left: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 1.1rem;
+  background: rgb(77, 214, 134);
+  color: white;
+  border: 1px solid rgb(231, 231, 231);
+  border-radius: 5px;
+}
+
+.createTodo button:hover {
+  background: rgb(22, 245, 115);
+}
+
+.createTodo button:active {
+  background: rgb(77, 214, 134);
+}
+
+.task {
+  font-size: 1.6rem;
+  align-self: center;
+  font-family: "Century Gothic";
+}
+
+.date {
+  font-size: 1.1rem;
+  align-self: center;
+  font-family: "Century Gothic";
+}
+
+.icon {
+  background: rgb(77, 214, 134);
+  color: white;
+  margin: 5px;
+  padding: 5px;
+  height: 2rem;
+  align-self: center;
+  border-radius: 5px;
+  justify-content: center;
 }

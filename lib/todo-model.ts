@@ -5,19 +5,19 @@ export class Todo {
   public uuid;
   public task;
   public isCompleted;
-  public createdAt;
+  public lastUpdatedAt;
   constructor(
     id: string,
     uuid: string,
     task: string,
     isCompleted: string,
-    createdAt: string
+    lastUpdatedAt: string
   ) {
     this.id = id;
     this.uuid = uuid;
     this.task = task;
     this.isCompleted = isCompleted;
-    this.createdAt = createdAt;
+    this.lastUpdatedAt = lastUpdatedAt;
   }
 
   static fromFormData(data: FormData): Todo | null {
@@ -25,8 +25,8 @@ export class Todo {
     const uuid = data.get("uuid");
     const task = data.get("task");
     const isCompleted = data.get("isCompleted");
-    const createdAt = data.get("createdAt");
-    if (this.#someIsNull(uuid, task, isCompleted, createdAt)) {
+    const lastUpdatedAt = data.get("lastUpdatedAt");
+    if (this.#someIsNull(uuid, task, isCompleted, lastUpdatedAt)) {
       return null;
     }
     return new Todo(
@@ -34,7 +34,7 @@ export class Todo {
       uuid!.toString(),
       task!.toString(),
       isCompleted!.toString(),
-      createdAt!.toString()
+      lastUpdatedAt!.toString()
     );
   }
 
@@ -45,8 +45,8 @@ export class Todo {
     const uuid = todos.get("uuid");
     const task = todos.get("task");
     const isCompleted = todos.get("isCompleted");
-    const createdAt = todos.get("createdAt");
-    if (this.#someIsNull(uuid, task, isCompleted, createdAt)) {
+    const lastUpdatedAt = todos.get("lastUpdatedAt");
+    if (this.#someIsNull(uuid, task, isCompleted, lastUpdatedAt)) {
       return null;
     }
     return new Todo(
@@ -54,7 +54,7 @@ export class Todo {
       uuid!.toString(),
       task!.toString(),
       isCompleted!.toString(),
-      createdAt!.toString()
+      lastUpdatedAt!.toString()
     );
   }
 

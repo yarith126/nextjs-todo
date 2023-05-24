@@ -39,10 +39,10 @@ export async function PUT(req: NextRequest, { params }: params) {
     SET uuid = ?,
         task = ?,
         isCompleted = ?,
-        createdAt = ?
+        lastUpdatedAt = ?
     WHERE id=?
     `,
-    [todo.uuid, todo.task, todo.isCompleted, todo.createdAt]
+    [todo.uuid, todo.task, todo.isCompleted, todo.lastUpdatedAt]
   );
   db.close();
 

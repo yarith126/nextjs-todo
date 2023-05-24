@@ -5,14 +5,14 @@ const json = {
       uuid: "123asdf",
       task: "title1",
       isCompleted: 1,
-      createdAt: "2023-05-23 16:56:26",
+      lastUpdatedAt: "2023-05-23 16:56:26",
     },
     {
       id: 2,
       uuid: "23fasd",
       task: "title2",
       isCompleted: 0,
-      createdAt: "2023-05-23",
+      lastUpdatedAt: "2023-05-23",
     },
   ],
 };
