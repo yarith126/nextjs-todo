@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { params } from "@/lib/type-alias";
 import moment from "moment";
 
-export async function GET({}, { params }: params) {
+export async function GET(req: NextRequest, { params }: params) {
   const db = await new Database().connect();
   let todo = await db.get("SELECT * FROM todo WHERE id = ?", params.id);
   db.close();
@@ -50,7 +50,7 @@ export async function PUT(req: NextRequest, { params }: params) {
   return NextResponse.json({ message: "success" });
 }
 
-export async function DELETE({}, { params }: params) {
+export async function DELETE(req: NextRequest, { params }: params) {
   const db = await new Database().connect();
   const row = await db.get("SELECT * FROM todo WHERE id = ?", params.id);
 
