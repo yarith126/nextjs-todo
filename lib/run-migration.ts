@@ -1,4 +1,3 @@
-import { connect } from "http2";
 import { Database } from "./database";
 
 async function runMigration() {
