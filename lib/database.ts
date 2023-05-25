@@ -9,7 +9,7 @@ export class Database {
 
   async connect() {
     return await sqlite.open({
-      filename: "database.db",
+      filename: "../database.db",
       driver: sqlite3.Database,
     });
   }
