@@ -1,16 +1,21 @@
 import { NextResponse, NextRequest } from "next/server";
-import { Database } from "@/lib/database";
-import { Todo } from "@/lib/todo-model";
 import { v4 as uuidv4 } from "uuid";
 import { ErrorResponse } from "@/lib/todo-api-helper";
-import moment from "moment";
+import prisma from "@/lib/prisma";
 
+/**
+ * Get all todo
+ *
+ * Use url parameter "q" to filter result
+ */
 export async function GET(req: NextRequest) {
   const q = req.nextUrl.searchParams.get("q") ?? "";
 
-  const db = await new Database().connect();
-  const todos = await db.all("SELECT * FROM todo WHERE task LIKE ?", `%${q}%`);
-  db.close();
+  const todos = await prisma.todo.findMany({
+    where: {
+      task: { contains: q },
+    },
+  });
 
   return NextResponse.json({ data: todos });
 }
@@ -21,30 +26,22 @@ export async function GET(req: NextRequest) {
  * Just pass "task" (type string) in form data and you're all set.
  */
 export async function POST(req: NextRequest) {
-  let todo: Todo | null;
+  let task: string | undefined;
   try {
-    const date = moment().format("YYYY-MM-DD H:mm:ss");
-    const formData = await req.formData();
-    formData.set("id", "");
-    formData.set("uuid", uuidv4());
-    formData.set("isCompleted", "false");
-    formData.set("lastUpdatedAt", date);
-    todo = Todo.fromFormData(formData);
+    task = (await req.formData()).get("task")?.toString();
   } catch (err) {
     return ErrorResponse.Todo400ParseFail();
   }
 
-  if (todo == null) return ErrorResponse.Todo400BadRequest();
+  if (task === undefined || task == "")
+    return ErrorResponse.Todo400BadFormData();
 
-  const db = await new Database().connect();
-  await db.run(
-    `
-    INSERT INTO todo (uuid, task, isCompleted, lastUpdatedAt)
-    VALUES (?, ?, ?, ?);
-    `,
-    [todo.uuid, todo.task, todo.isCompleted, todo.lastUpdatedAt]
-  );
-  db.close();
+  await prisma.todo.create({
+    data: {
+      uuid: uuidv4(),
+      task: task,
+    },
+  });
 
   return NextResponse.json({ message: "success" });
 }

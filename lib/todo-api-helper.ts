@@ -15,13 +15,15 @@ export class ErrorResponse {
     );
   }
 
-  static Todo400BadRequest() {
+  static Todo400BadFormData() {
     return NextResponse.json(
       {
         message:
-          "missing or bad data types of uuid, task, isCompleted, lastUpdatedAt",
+          "missing or data types of task or isCompleted or task is empty",
       },
       { status: 400 }
     );
   }
 }
+
+export type params = { params: { id: string } };

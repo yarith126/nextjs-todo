@@ -1,14 +1,12 @@
 "use client";
-
-import styles from "./Todo.module.css";
-import { Todo } from "@/lib/todo-model";
 import { useEffect, useState } from "react";
-import { baseUrl } from "@/lib/config";
+import { Todo } from "@/lib/todo-model";
 import { faPencilSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button, Modal } from "react-bootstrap";
+import styles from "./Todo.module.css";
 import "font-awesome/css/font-awesome.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Modal } from "react-bootstrap";
 
 export default function TodosPage() {
   const [inputText, setInputText] = useState("");
@@ -16,7 +14,7 @@ export default function TodosPage() {
   const [fetchTrigger, setFetchTrigger] = useState(true);
   const [todoOnGoing, setTodoOnGoing] = useState<Todo[]>([]);
   const [todoCompleted, setTodoCompleted] = useState<Todo[]>([]);
-  const [modalTodo, setModalTodo] = useState<Todo>();
+  const [modalTodo, setModalTodo] = useState<Todo | undefined>();
   const [modalInputText, setModalInputText] = useState("");
 
   useEffect(() => {}, [inputText]);
@@ -42,7 +40,7 @@ export default function TodosPage() {
 
   const onSubmit = async (event: any) => {
     event.preventDefault();
-    const url = `${baseUrl}api/todo`;
+    const url = `/api/todo`;
     const formData = new FormData();
     formData.append("task", inputText);
     const requestOptions = { method: "POST", body: formData };
@@ -163,7 +161,7 @@ function TodoTile({
   }
 
   async function onDelete(id: string) {
-    const url = `${baseUrl}api/todo/${id}`;
+    const url = `/api/todo/${id}`;
     await fetch(url, { method: "DELETE", cache: "no-store" });
     reFetchCallBack();
   }
@@ -207,7 +205,7 @@ function TodoTile({
 }
 
 async function getTodos(): Promise<Todo[]> {
-  const url = `${baseUrl}api/todo`;
+  const url = `/api/todo`;
   const response = await fetch(url, { cache: "no-store" });
   const json = await response.json();
   console.log(json);
@@ -222,7 +220,7 @@ async function getTodos(): Promise<Todo[]> {
 }
 
 async function updateTodoStatus(id: string, isCompleted: boolean) {
-  const url = `${baseUrl}api/todo/${id}`;
+  const url = `/api/todo/${id}`;
   const formData = new FormData();
   formData.append("isCompleted", `${isCompleted}`);
   const requestOptions = {
@@ -235,7 +233,7 @@ async function updateTodoStatus(id: string, isCompleted: boolean) {
 }
 
 async function updateTodoTask(id: string, task: string) {
-  const url = `${baseUrl}api/todo/${id}`;
+  const url = `/api/todo/${id}`;
   const formData = new FormData();
   formData.append("task", task);
   const requestOptions = {

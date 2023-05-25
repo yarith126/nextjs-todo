@@ -1,3 +1,4 @@
+import moment from "moment";
 import "next/server";
 
 export class Todo {
@@ -45,7 +46,9 @@ export class Todo {
     const uuid = todos.get("uuid");
     const task = todos.get("task");
     const isCompleted = todos.get("isCompleted");
-    const lastUpdatedAt = todos.get("lastUpdatedAt");
+    const date = Date.parse(todos.get("lastUpdatedAt"));
+    const lastUpdatedAt = moment(date).format("DD/MM/YY H:MM:ss");
+
     if (this.#someIsNull(uuid, task, isCompleted, lastUpdatedAt)) {
       return null;
     }
