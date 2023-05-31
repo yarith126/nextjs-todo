@@ -1,0 +1,94 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.todoTile {
+  color: rgb(56, 56, 56);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  padding: 0.2rem 0.8rem;
+  margin-top: 0.8rem;
+  margin-bottom: 0.8rem;
+  background: #92f3e6;
+  box-shadow: 0px 0px 1px 0.5px #38383875;
+  border-radius: 2px;
+}
+
+.todoTile input {
+  transform: scale(2);
+  align-self: center;
+  height: min-content;
+  margin-left: 14px;
+  margin-right: 20px;
+}
+
+
+.inputText {
+  height: 50px;
+  padding-left: 10px;
+  font-size: 1.4rem;
+  padding-bottom: 5px;
+}
+
+.createTodo {
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.createTodo button {
+  height: 50px;
+  margin-left: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 1.1rem;
+  background: rgb(77, 214, 134);
+  color: white;
+  border: 1px solid rgb(231, 231, 231);
+  border-radius: 5px;
+}
+
+.modalButton {
+  border: 0px;
+  height: 43px;
+  font-size: 1.1rem;
+  background: rgb(77, 214, 134);
+}
+
+.modalButton:hover {
+  background: rgb(22, 245, 115);
+}
+
+.createTodo button:hover {
+  background: rgb(22, 245, 115);
+}
+
+.createTodo button:active {
+  background: rgb(77, 214, 134);
+}
+
+.task {
+  font-size: 1.5rem;
+  height: 40%;
+  align-self: center;
+}
+
+.date {
+  font-size: 1.0rem;
+  height: 11%;
+  align-self: center;
+}
+
+.icon {
+  background: rgb(77, 214, 134);
+  color: white;
+  margin: 5px;
+  padding: 5px;
+  height: 2rem;
+  align-self: center;
+  border-radius: 5px;
+  justify-content: center;
+}
